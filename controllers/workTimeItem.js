@@ -3,7 +3,7 @@
     'use strict';
 
     var mongoose = require('mongoose'),
-        WorkTimeItemModel = require("./../models/workTimeItem.js"),
+        WorkTimeItemModel = require("./../models/workTimeItemModel.js"),
         WorkTimeItem = mongoose.model("WorkTimeItem");
 
     exports.getWorkTimeItem =  function (req, res) {
