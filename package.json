@@ -1,5 +1,8 @@
 {
   "name": "worktrack-app",
+  "engines": {
+    "node": "0.12.x"
+  },
   "dependencies": {
     "mongoose": "^4.0.6",
     "restify": "^3.0.3"
