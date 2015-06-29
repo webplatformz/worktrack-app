@@ -20,8 +20,10 @@
     server.get('/hello/:name', respond);
     server.head('/hello/:name', respond);
 
-    server.get({path: "/worktimeitems/:id", version: "1.0.0"}, controllers.workTimeItem.getWorkTimeItem);
     server.post("/worktimeitems", controllers.workTimeItem.createWorkTimeItem);
+    server.put("/worktimeitems/:id", controllers.workTimeItem.updateWorkTimeItem);
+    server.del("/worktimeitems/:id", controllers.workTimeItem.deleteWorkTimeItem);
+    server.get({path: "/worktimeitems/:id", version: "1.0.0"}, controllers.workTimeItem.getWorkTimeItem);
 
     server.listen(8080, function (err) {
         if (err) {
