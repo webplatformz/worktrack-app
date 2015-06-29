@@ -1,6 +1,6 @@
 'use strict';
 
-let assert = require("assert");
+var assert = require("assert");
 
 describe('Array', function(){
     describe('#indexOf()', function(){
