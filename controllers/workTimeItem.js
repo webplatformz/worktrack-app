@@ -9,9 +9,27 @@
         ObjectId = mongoose.Types.ObjectId;
 
     exports.getWorkTimeItem =  function (req, res) {
-        //res.send('worktime-item ' + req.params.id + ' requested');
-        var workTimeItem = new WorkTimeItem();
-        res.send(workTimeItem);
+        WorkTimeItem.findById(new ObjectId(req.params.id), function (err, workTimeItem) {
+            if (err) {
+                res.status(500);
+                res.json({
+                    type: false,
+                    data: "Error occured: " + err
+                });
+            } else {
+                if (workTimeItem) {
+                    res.json({
+                        type: true,
+                        data: workTimeItem
+                    });
+                } else {
+                    res.json({
+                        type: false,
+                        data: "WorkTimeItem with id " + req.params.id + " not found"
+                    });
+                }
+            }
+        });
     };
 
     exports.createWorkTimeItem = function (req, res) {
