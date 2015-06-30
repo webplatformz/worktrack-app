@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-    <link rel="import" href="elements/proto-element.html">
+    <title>Hello React!</title>
+    <script src="../bower_components/react/react.js"></script>
+    <script src="../bower_components/react/JSXTransformer.js"></script>
 </head>
 <body>
-<span id="browser-sync-binding"></span>
-<proto-element></proto-element>
+<div id="example"></div>
+<script type="text/jsx">
+    React.render(
+            <h1>Hello, world!</h1>,
+            document.getElementById('example')
+    );
+</script>
 </body>
 </html>

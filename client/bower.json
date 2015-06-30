@@ -13,6 +13,10 @@
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.0.0"
+    "react": "latest",
+    "bootstrap": "latest",
+    "lodash": "latest",
+    "underscore.string": "latest",
+    "font-awesome": "latest"
   }
 }
