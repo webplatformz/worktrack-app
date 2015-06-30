@@ -1,22 +1,9 @@
 {
   "name": "worktrack",
   "version": "0.0.1",
-  "homepage": "https://github.com/webplatformz/worktrack-app",
-  "description": "A simple app for basic reporting of working times",
-  "main": "app",
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
   "dependencies": {
-    "react": "latest",
+    "jquery": "~2.1.1",
     "bootstrap": "latest",
-    "lodash": "latest",
-    "underscore.string": "latest",
-    "font-awesome": "latest"
+    "modernizr": "^2.8.3"
   }
 }
