@@ -1,5 +1,9 @@
 node_modules
+bower_components
 dist
+test/bower_components/
+test/temp
+.tmp
 *.log
 .idea
 .DS_store

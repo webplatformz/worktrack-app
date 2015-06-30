@@ -1,20 +1,35 @@
-var restify = require('restify');
+/*jshint node:true */
+(function () {
+    'use strict';
+    var restify = require('restify'),
+        fs = require("fs"),
+        server = restify.createServer(),
+        controllers = {},
+        controllers_path = process.cwd() + '/controllers';
 
-function respond(req, res, next) {
-    res.send('hello ' + req.params.name);
-}
+    fs.readdirSync(controllers_path).forEach(function (file) {
+        if (file.indexOf('.js') != -1) {
+            controllers[file.split('.')[0]] = require(controllers_path + '/' + file);
+        }
+    });
 
-var server = restify.createServer();
-server.get('/hello/:name', respond);
-server.head('/hello/:name', respond);
-
-// server.post("/worktimeitems", controllers.worktimeitem.createWorkTimeItem)
-
-server.listen(8080, function (err) {
-    if (err) {
-        console.error(err)
+    function respond(req, res) {
+        res.send('hello ' + req.params.name);
     }
-    else {
-        console.log('%s listening at %s', server.name, server.url);
-    }
-})
+
+    server.get('/hello/:name', respond);
+    server.head('/hello/:name', respond);
+
+    server.post("/worktimeitems", controllers.workTimeItem.createWorkTimeItem);
+    server.put("/worktimeitems/:id", controllers.workTimeItem.updateWorkTimeItem);
+    server.del("/worktimeitems/:id", controllers.workTimeItem.deleteWorkTimeItem);
+    server.get({path: "/worktimeitems/:id", version: "1.0.0"}, controllers.workTimeItem.getWorkTimeItem);
+
+    server.listen(8080, function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('%s listening at %s', server.name, server.url);
+        }
+    });
+}());
