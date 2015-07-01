@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var del = require('del');
+var nodemon = require('nodemon');
 
 
 var path = require('path');
@@ -186,6 +187,19 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], functio
         .pipe($.uglify())
         .pipe($.stripDebug())
         .pipe(gulp.dest('dist/scripts'));
+});
+
+gulp.task('nodemon', function (cb) {
+    return nodemon({
+        script: './tut/server.js',
+        ignore: [
+            './bower_components/**',
+            './node_modules/**',
+            './build/**'
+        ]
+    }).on('start', function () {
+        cb();
+    });
 });
 
 // Default task
