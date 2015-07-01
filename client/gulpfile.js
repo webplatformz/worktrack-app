@@ -157,7 +157,7 @@ gulp.task('extras', function () {
 });
 
 // Watch
-gulp.task('watch', ['html', 'fonts', 'bundle'], function () {
+gulp.task('watch', ['html', 'fonts', 'bundle', 'css'], function () {
 
     browserSync({
         notify: false,
@@ -189,17 +189,11 @@ gulp.task('build', ['html', 'buildBundle', 'images', 'fonts', 'extras'], functio
         .pipe(gulp.dest('dist/scripts'));
 });
 
-gulp.task('nodemon', function (cb) {
-    return nodemon({
-        script: './tut/server.js',
-        ignore: [
-            './bower_components/**',
-            './node_modules/**',
-            './build/**'
-        ]
-    }).on('start', function () {
-        cb();
-    });
+gulp.task('css', function() {
+    return gulp.src('app/styles/**/*.css')
+        .pipe($.autoprefixer('last 1 version'))
+        .pipe(gulp.dest('dist/styles'))
+        .pipe($.size());
 });
 
 // Default task
