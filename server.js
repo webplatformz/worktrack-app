@@ -8,7 +8,7 @@
         controllers_path = process.cwd() + '/controllers';
 
     fs.readdirSync(controllers_path).forEach(function (file) {
-        if (file.indexOf('.js') != -1) {
+        if (file.indexOf('.js') !== -1) {
             controllers[file.split('.')[0]] = require(controllers_path + '/' + file);
         }
     });
@@ -16,6 +16,8 @@
     function respond(req, res) {
         res.send('hello ' + req.params.name);
     }
+
+    server.use(restify.bodyParser({mapParams: false}));
 
     server.get('/hello/:name', respond);
     server.head('/hello/:name', respond);
