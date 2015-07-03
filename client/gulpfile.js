@@ -172,6 +172,8 @@ gulp.task('watch', ['html', 'fonts', 'bundle', 'css'], function () {
     // Watch .json files
     gulp.watch('app/scripts/**/*.json', ['json']);
 
+    gulp.watch('app/scripts/**/*.js', ['js']);
+
     // Watch .html files
     gulp.watch('app/*.html', ['html', reload]);
 

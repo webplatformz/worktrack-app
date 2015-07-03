@@ -1,22 +1,18 @@
-'use strict';
+/** @jsx React.DOM */
 
-var recordingApi = require('./../viewmodel/recordings');
+'use strict';
+var Recordings = require('./../viewmodel/recordings');
 
 var DayOverview = React.createClass({
     getInitialState: function () {
-        console.log(recordingApi);
-        return {date: recordingApi.getActualDay()};
+        return {date: Recordings.getActualDay() };
     },
     render: function () {
-        return (
-            <div>
+        return <div>
                 <DaySwitch />
-
                 <div>{this.state.date}</div>
-
                 <DayNote />
-            </div>
-        );
+            </div>;
     }
 });
 
@@ -41,7 +37,7 @@ var DaySwitch = React.createClass({
 
 var DayNote = React.createClass({
     getInitialState: function () {
-        return {dayNote: recordingApi.getActualDayNote()};
+        return { dayNote: Recordings.getActualDayNote() };
     },
     render: function () {
         return (
