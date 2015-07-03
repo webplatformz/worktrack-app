@@ -1,12 +1,20 @@
-'use strict'
+'use strict';
+
+var recordingApi = require('./../viewmodel/recordings');
 
 var DayOverview = React.createClass({
+    getInitialState: function () {
+        console.log(recordingApi);
+        return {date: recordingApi.getActualDay()};
+    },
     render: function () {
         return (
             <div>
                 <DaySwitch />
 
-                <h1>Day Overview</h1>
+                <div>{this.state.date}</div>
+
+                <DayNote />
             </div>
         );
     }
@@ -15,22 +23,31 @@ var DayOverview = React.createClass({
 var DaySwitch = React.createClass({
     render: function () {
         return (
-            <div>
-                <ul className="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <ul className="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
         );
     }
 });
 
-React.render(<DayOverview />, document.getElementById('content'));
+var DayNote = React.createClass({
+    getInitialState: function () {
+        return {dayNote: recordingApi.getActualDayNote()};
+    },
+    render: function () {
+        return (
+            <textarea>{this.state.dayNote}</textarea>
+        );
+    }
+});
+
+React.render(<DayOverview />, document.getElementById('dayView'));
