@@ -9,7 +9,16 @@
         ObjectId = mongoose.Types.ObjectId;
 
     exports.getWorkTimeItem =  function (req, res) {
-        WorkTimeItem.findById(new ObjectId(req.params.id), function (err, workTimeItem) {
+        res.header("Access-Control-Allow-Credentials", "true");
+        //res.header("Access-Control-Allow-Origin", "localhost"); //dsafadsf
+        //res.header("Access-Control-Allow-Headers", "X-Requested-With");
+
+        res.json({
+            type: true,
+            data: { note: 'note from server' }
+        });
+
+        /*WorkTimeItem.findById(new ObjectId(req.params.id), function (err, workTimeItem) {
             if (err) {
                 res.status(500);
                 res.json({
@@ -29,7 +38,7 @@
                     });
                 }
             }
-        });
+        });*/
     };
 
     exports.createWorkTimeItem = function (req, res) {

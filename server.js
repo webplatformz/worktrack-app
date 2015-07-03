@@ -19,6 +19,28 @@
 
     server.use(restify.bodyParser({mapParams: false}));
 
+    /*server.use(
+        function crossOrigin(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "X-Requested-With");
+            return next();
+        }
+    );*/
+
+    //server.use(restify.CORS());
+    server.use(restify.fullResponse());
+
+    server.use(restify.CORS());
+
+    server.opts(/.*/, function (req, res, next) {
+        res.header("Access-Control-Allow-Credentials", "true");
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", req.header("Access-Control-Request-Method"));
+        res.header("Access-Control-Allow-Headers", req.header("Access-Control-Request-Headers"));
+        res.send(200);
+        return next();
+    });
+
     server.get('/hello/:name', respond);
     server.head('/hello/:name', respond);
 

@@ -2,6 +2,7 @@
 
 'use strict';
 var Recordings = require('./../viewmodel/recordings');
+var Rest = require('./../rest');
 
 var DayOverview = React.createClass({
     getInitialState: function () {
@@ -37,12 +38,33 @@ var DaySwitch = React.createClass({
 
 var DayNote = React.createClass({
     getInitialState: function () {
-        return { dayNote: Recordings.getActualDayNote() };
+        return { dayNote: '' };
+    },
+    componentDidMount: function() {
+        var that = this;
+        console.log('getInitialState');
+
+        var options = {
+            host: 'localhost',
+            port: 8080,
+            path: '/worktimeitems/1',
+            method: 'GET',
+            crossDomain: true,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        Rest.getJSON(options,
+            function(statusCode, result)
+            {
+                var json = JSON.stringify(result);
+                console.log(json);
+                that.setState({ dayNote: 'response received' });
+            });
     },
     render: function () {
-        return (
-            <textarea>{this.state.dayNote}</textarea>
-        );
+        return <div>{this.state.dayNote}</div>;
     }
 });
 
